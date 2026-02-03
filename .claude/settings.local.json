@@ -3,7 +3,9 @@
     "allow": [
       "Bash(composer config:*)",
       "Bash(composer update:*)",
-      "Bash(vendor/bin/phpunit:*)"
+      "Bash(vendor/bin/phpunit:*)",
+      "Bash(tree:*)",
+      "Bash(markdownlint:*)"
     ]
   }
 }

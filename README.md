@@ -2,7 +2,8 @@
 
 [![run-tests](https://github.com/nadi-pro/nadi-yii2/actions/workflows/run-tests.yml/badge.svg)](https://github.com/nadi-pro/nadi-yii2/actions/workflows/run-tests.yml)
 
-Nadi monitoring SDK for Yii 2 applications. Monitor exceptions, slow queries, HTTP errors, and application performance in your Yii 2 projects.
+Nadi monitoring SDK for Yii 2 applications. Monitor exceptions, slow queries,
+HTTP errors, and application performance in your Yii 2 projects.
 
 ## Requirements
 
@@ -15,11 +16,9 @@ Nadi monitoring SDK for Yii 2 applications. Monitor exceptions, slow queries, HT
 composer require nadi-pro/nadi-yii2
 ```
 
-## Configuration
+## Quick Start
 
-### 1. Add the component
-
-In your application config (`config/web.php` or `config/main.php`):
+Add to your application config (`config/web.php`):
 
 ```php
 return [
@@ -28,36 +27,10 @@ return [
         'nadi' => [
             'class' => \Nadi\Yii2\NadiComponent::class,
             'enabled' => true,
-            'driver' => 'http', // log, http, opentelemetry
+            'driver' => 'log',
             'connections' => [
                 'log' => [
                     'path' => '@runtime/nadi',
-                ],
-                'http' => [
-                    'api_key' => getenv('NADI_API_KEY') ?: '',
-                    'app_key' => getenv('NADI_APP_KEY') ?: '',
-                    'endpoint' => 'https://nadi.pro/api',
-                    'version' => 'v1',
-                ],
-                'opentelemetry' => [
-                    'endpoint' => 'http://localhost:4318',
-                    'service_name' => 'my-app',
-                    'service_version' => '1.0.0',
-                    'environment' => YII_ENV,
-                ],
-            ],
-            'query' => [
-                'slow_threshold' => 500,
-            ],
-            'http' => [
-                'hidden_request_headers' => ['Authorization', 'php-auth-pw'],
-                'hidden_parameters' => ['password', 'password_confirmation'],
-                'ignored_status_codes' => ['200-307'],
-            ],
-            'sampling' => [
-                'strategy' => 'fixed_rate',
-                'config' => [
-                    'sampling_rate' => 0.1,
                 ],
             ],
         ],
@@ -65,60 +38,23 @@ return [
 ];
 ```
 
-### 2. Register the bootstrap component
-
-Ensure `'nadi'` is listed in the `bootstrap` array of your application config.
-
-### 3. (Optional) Add behavior for OpenTelemetry
-
-```php
-return [
-    'as otel' => [
-        'class' => \Nadi\Yii2\Behavior\OpenTelemetryBehavior::class,
-    ],
-];
-```
-
-### 4. Console commands
-
-In your console application config:
-
-```php
-'controllerMap' => [
-    'nadi' => \Nadi\Yii2\Controllers\NadiController::class,
-],
-```
-
-### 5. Environment variables
-
-```
-NADI_API_KEY=your-api-key
-NADI_APP_KEY=your-app-key
-```
-
 ## Features
 
-- **Exception Monitoring**: Automatically captures unhandled exceptions
-- **HTTP Monitoring**: Tracks HTTP requests and error responses via `EVENT_AFTER_REQUEST`
-- **Database Monitoring**: Monitors slow SQL queries via Yii 2 DB events
-- **OpenTelemetry**: Trace context propagation via application behavior
-- **User Context**: Automatically captures authenticated user via `Yii::$app->user->identity`
+- **Exception Monitoring** - Automatically captures unhandled exceptions
+- **HTTP Monitoring** - Tracks HTTP requests and error responses
+- **Database Monitoring** - Monitors slow SQL queries
+- **OpenTelemetry** - Trace context propagation and OTLP export
+- **User Context** - Captures authenticated user information
+- **Sampling** - Fixed rate, dynamic rate, interval, and peak load strategies
 
-## Console Commands
+## Documentation
 
-```bash
-# Install configuration and shipper
-yii nadi/install
+See the [full documentation](docs/README.md) for detailed guides on:
 
-# Test the connection
-yii nadi/test
-
-# Verify configuration
-yii nadi/verify
-
-# Update shipper binary
-yii nadi/update-shipper
-```
+- [Getting Started](docs/01-getting-started/README.md) - Installation and setup
+- [Architecture](docs/02-architecture/README.md) - System design and components
+- [Configuration](docs/03-configuration/README.md) - Drivers, monitoring, and sampling
+- [Advanced](docs/04-advanced/README.md) - OpenTelemetry and testing
 
 ## Testing
 

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer config:*)",
+      "Bash(composer update:*)"
+    ]
+  }
+}

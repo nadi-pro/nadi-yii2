@@ -30,7 +30,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "php-http/discovery": true,
-            "tbachert/spi": true
+            "tbachert/spi": true,
+            "yiisoft/yii2-composer": true
         }
     },
     "minimum-stability": "dev",

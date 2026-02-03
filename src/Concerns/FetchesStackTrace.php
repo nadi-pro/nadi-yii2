@@ -29,7 +29,7 @@ trait FetchesStackTrace
     protected function ignoredPaths(): array
     {
         $paths = [
-            DIRECTORY_SEPARATOR . 'vendor',
+            DIRECTORY_SEPARATOR.'vendor',
         ];
 
         if (class_exists(\Yii::class)) {

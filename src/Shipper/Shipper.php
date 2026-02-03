@@ -12,7 +12,7 @@ class Shipper
         private string $rootPath,
     ) {
         $this->binaryManager = new BinaryManager(
-            $this->rootPath . '/vendor/bin',
+            $this->rootPath.'/vendor/bin',
         );
     }
 

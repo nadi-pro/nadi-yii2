@@ -25,8 +25,8 @@ class NadiController extends Controller
     {
         $this->stdout("Installing Nadi Monitoring...\n");
 
-        $configSource = dirname(__DIR__, 2) . '/config/nadi.php';
-        $configDest = \Yii::getAlias('@app') . '/config/nadi.php';
+        $configSource = dirname(__DIR__, 2).'/config/nadi.php';
+        $configDest = \Yii::getAlias('@app').'/config/nadi.php';
 
         if (! file_exists($configDest)) {
             if (file_exists($configSource)) {
@@ -110,7 +110,7 @@ class NadiController extends Controller
         }
 
         $config = $nadi->getConfig();
-        $this->stdout("Enabled: " . ($config['enabled'] ? 'Yes' : 'No') . "\n");
+        $this->stdout('Enabled: '.($config['enabled'] ? 'Yes' : 'No')."\n");
         $this->stdout("Driver: {$config['driver']}\n");
 
         $transporter = $nadi->getTransporter();

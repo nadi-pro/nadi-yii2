@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
             'driver' => 'log',
             'connections' => [
                 'log' => [
-                    'path' => sys_get_temp_dir() . '/nadi-test',
+                    'path' => sys_get_temp_dir().'/nadi-test',
                 ],
                 'http' => [
                     'api_key' => 'test-api-key',

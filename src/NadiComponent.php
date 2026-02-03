@@ -57,7 +57,7 @@ class NadiComponent extends Component
         if (empty($this->connections)) {
             $this->connections = [
                 'log' => [
-                    'path' => \Yii::getAlias('@runtime') . '/nadi',
+                    'path' => \Yii::getAlias('@runtime').'/nadi',
                 ],
                 'http' => [
                     'api_key' => '',

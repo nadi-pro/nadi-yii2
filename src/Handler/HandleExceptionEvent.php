@@ -26,10 +26,10 @@ class HandleExceptionEvent extends Base
         ];
 
         $entry->hashFamily = $this->hash(
-            get_class($exception) .
-            $exception->getFile() .
-            $exception->getLine() .
-            $exception->getMessage() .
+            get_class($exception).
+            $exception->getFile().
+            $exception->getLine().
+            $exception->getMessage().
             date('Y-m-d'),
         );
 

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(composer config:*)",
-      "Bash(composer update:*)"
+      "Bash(composer update:*)",
+      "Bash(vendor/bin/phpunit:*)"
     ]
   }
 }

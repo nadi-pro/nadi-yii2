@@ -2,6 +2,7 @@
 
 namespace Nadi\Yii2;
 
+use Nadi\Sampling\Config as SamplingConfig;
 use Nadi\Sampling\DynamicRateSampling;
 use Nadi\Sampling\FixedRateSampling;
 use Nadi\Sampling\IntervalSampling;
@@ -64,17 +65,21 @@ class Transporter
         $strategyConfig = $samplingConfig['config'] ?? [];
 
         $sampling = match ($strategy) {
-            'fixed_rate' => new FixedRateSampling($strategyConfig['sampling_rate'] ?? 0.1),
-            'dynamic_rate' => new DynamicRateSampling(
-                $strategyConfig['base_rate'] ?? 0.05,
-                $strategyConfig['load_factor'] ?? 1.0,
-            ),
-            'interval' => new IntervalSampling($strategyConfig['interval_seconds'] ?? 60),
-            'peak_load' => new PeakLoadSampling(
-                $strategyConfig['base_rate'] ?? 0.05,
-                $strategyConfig['load_factor'] ?? 1.0,
-            ),
-            default => new FixedRateSampling(0.1),
+            'fixed_rate' => new FixedRateSampling(new SamplingConfig(
+                samplingRate: $strategyConfig['sampling_rate'] ?? 0.1,
+            )),
+            'dynamic_rate' => new DynamicRateSampling(new SamplingConfig(
+                baseRate: $strategyConfig['base_rate'] ?? 0.05,
+                loadFactor: $strategyConfig['load_factor'] ?? 1.0,
+            )),
+            'interval' => new IntervalSampling(new SamplingConfig(
+                intervalSeconds: $strategyConfig['interval_seconds'] ?? 60,
+            )),
+            'peak_load' => new PeakLoadSampling(new SamplingConfig(
+                baseRate: $strategyConfig['base_rate'] ?? 0.05,
+                loadFactor: $strategyConfig['load_factor'] ?? 1.0,
+            )),
+            default => new FixedRateSampling(new SamplingConfig(samplingRate: 0.1)),
         };
 
         return new SamplingManager($sampling);
